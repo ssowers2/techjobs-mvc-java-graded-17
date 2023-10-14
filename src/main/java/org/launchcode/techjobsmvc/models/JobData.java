@@ -13,10 +13,9 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map; //added SS
+import java.util.HashMap;//added SS
 
-/**
- * Created by LaunchCode
- */
 public class JobData {
 
     private static final String DATA_FILE = "job_data.csv";
@@ -32,7 +31,51 @@ public class JobData {
      * Fetch list of all job objects from loaded data,
      * without duplicates, then return a copy.
      */
+    public static Map<String, List<String>> findAllTableChoices() {
+        loadData();
+        Map<String, List<String>> tableChoices = new HashMap<>();
+        tableChoices.put("employer", getAllEmployerNames());
+        tableChoices.put("location", getAllLocationNames());
+        tableChoices.put("positionType", getAllPositionTypeNames());
+        tableChoices.put("coreCompetency", getAllCoreCompetencyNames());
+        return tableChoices;
+    }
 
+    public static List<String> getAllEmployerNames() {
+        loadData();
+        List<String> employerNames = new ArrayList<>();
+        for (Employer employer : allEmployers) {
+            employerNames.add(employer.getValue());
+        }
+        return employerNames;
+    }
+
+    public static List<String> getAllLocationNames() {
+        loadData();
+        List<String> locationNames = new ArrayList<>();
+        for (Location location : allLocations) {
+            locationNames.add(location.getValue());
+        }
+        return locationNames;
+    }
+
+    public static List<String> getAllPositionTypeNames() {
+        loadData();
+        List<String> positionTypeNames = new ArrayList<>();
+        for (PositionType positionType : allPositionTypes) {
+            positionTypeNames.add(positionType.getValue());
+        }
+        return positionTypeNames;
+    }
+
+    public static List<String> getAllCoreCompetencyNames() {
+        loadData();
+        List<String> coreCompetencyNames = new ArrayList<>();
+        for (CoreCompetency coreCompetency : allCoreCompetency) {
+            coreCompetencyNames.add(coreCompetency.getValue());
+        }
+        return coreCompetencyNames;
+    }
     public static ArrayList<Job> findAll() {
 
         // load data, if not already loaded
@@ -42,16 +85,6 @@ public class JobData {
         return new ArrayList<>(allJobs);
     }
 
-    /**
-     * Returns the results of searching the Jobs data by field and search term.
-     *
-     * For example, searching for employer "Enterprise" will include results
-     * with "Enterprise Holdings, Inc".
-     *
-     * @param column Job field that should be searched.
-     * @param value Value of the field to search for.
-     * @return List of all jobs matching the criteria.
-     */
     public static ArrayList<Job> findByColumnAndValue(String column, String value) {
 
         // load data, if not already loaded
@@ -231,5 +264,3 @@ public class JobData {
     }
 
 }
-
-
