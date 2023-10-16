@@ -41,6 +41,15 @@ public class JobData {
         return tableChoices;
     }
 
+    public static List<String> getAllNames() {
+        loadData();
+        List<String> jobNames = new ArrayList<>();
+        for (Job job : allJobs) {
+            jobNames.add(job.getName());
+        }
+        return jobNames;
+    }
+
     public static List<String> getAllEmployerNames() {
         loadData();
         List<String> employerNames = new ArrayList<>();
