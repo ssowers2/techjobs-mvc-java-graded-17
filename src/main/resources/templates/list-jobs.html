@@ -1,26 +1,20 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:replace="~{fragments :: head}"></head>
-
 <body>
+
 <div th:replace="~{fragments :: page-header}"></div>
 
 <div class="container body-content">
   <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
-  <h2 class="centered">View Jobs By Category</h2>
 </div>
 
 <table class="centeredTable">
-  <tr>
-    <th:block th:each="column : ${columns}">
-      <th th:text="${column.value}"></th>
-    </th:block>
+  <tr th:each="column : ${columns}">
+    <th th:text="${column.value}"></th>
   </tr>
   <tr>
-    <!-- TODO #2: Complete the View Jobs By Category Table. -->
-    <td th:fragment="job-fields">
-      <a th:href="@{/list/jobs(column='all', value='all')}" th:text="All"></a> <!-- Link to view all jobs in the "All" category -->
-    </td>
+    <td th:fragment="job-fields"></td>
     <td th:each="category : ${tableChoices}">
       <ul>
         <li th:each="item : ${category.value}">
@@ -30,5 +24,35 @@
     </td>
   </tr>
 </table>
+
+<!-- Display job listings -->
+<table class="job-listing" th:each="job : ${jobs}">
+  <tr>
+    <th>Job ID:</th>
+    <td th:text="${job.id}"></td>
+  </tr>
+
+  <tr>
+    <th>Employer:</th>
+    <td th:text="${job.employer.value}"></td>
+  </tr>
+
+  <tr>
+    <th>Location:</th>
+    <td th:text="${job.location.value}"></td>
+  </tr>
+
+  <tr>
+    <th>Position Type:</th>
+    <td th:text="${job.positionType.value}"></td>
+  </tr>
+
+  <tr>
+    <th>Core Competency:</th>
+    <td th:text="${job.coreCompetency.value}"></td>
+  </tr>
+
+</table>
+<a th:href="@{/list/jobs(column='all', value='all')}" th:text="All"></a>
 </body>
 </html>
