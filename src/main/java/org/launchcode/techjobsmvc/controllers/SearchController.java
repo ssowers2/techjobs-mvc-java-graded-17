@@ -27,15 +27,19 @@ public class SearchController {
 
         ArrayList<Job> jobs;
 
-        if (searchType.equals("all") || searchTerm.isEmpty()) {
+        if (searchTerm.toLowerCase().equals("all") || searchTerm.isEmpty()) {
             jobs = JobData.findAll();
         } else {
-            jobs = JobData.findByColumnAndValue(searchType, searchTerm);
-        }
+            String searchTermLower = searchTerm.toLowerCase();
+            jobs = JobData.findByColumnAndValue(searchType, searchTermLower);
+        } //should convert search term to lower
 
         model.addAttribute("jobs", jobs);
         model.addAttribute("columns", ListController.columnChoices);
-        model.addAttribute("tableChoices", JobData.findAllTableChoices());
+        //model.addAttribute("tableChoices", JobData.findAllTableChoices());
+        //model.addAttribute("searchType", searchType);
+        model.addAttribute("title",
+                "Jobs With " + ListController.columnChoices.get(searchType) + ": " + searchTerm);
 
         return "search";
     }

@@ -19,7 +19,7 @@ public class ListController {
     static HashMap<String, Object> tableChoices = new HashMap<>();
 
     public ListController() {
-        columnChoices.put("all", "All");
+        columnChoices.put("all", "All");//added this SS
         columnChoices.put("name", "Name");//added this SS
         columnChoices.put("employer", "Employer");
         columnChoices.put("location", "Location");
