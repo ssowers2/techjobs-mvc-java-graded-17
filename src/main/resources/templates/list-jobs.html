@@ -9,23 +9,6 @@
   <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
 </div>
 
-<!--<table class="centeredTable">-->
-<!--  <tr th:each="column : ${columns}">-->
-<!--    <th th:text="${column.value}"></th>-->
-<!--  </tr>-->
-<!--  <tr>-->
-<!--  <td th:fragment="job-fields"></td>-->
-<!--    <td th:each="category : ${tableChoices}">-->
-<!--      <ul>-->
-<!--        <li th:each="item : ${category.value}">-->
-<!--          <a th:href="@{/list/jobs(column=${category.key}, value=${item})}" th:text="${item}"></a>-->
-<!--        </li>-->
-<!--      </ul>-->
-<!--</td>-->
-<!--  </tr>-->
-<!--</table>-->
-
-<!-- Display job listings -->
 <table class="job-listing" th:each="job : ${jobs}">
   <tr>
     <th>Job ID:</th>
